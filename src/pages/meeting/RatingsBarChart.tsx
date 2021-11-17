@@ -4,15 +4,15 @@ import {
   Paper,
   Popover,
   Typography,
-  useTheme,
+  //useTheme,
 } from "@material-ui/core";
-import { Rating } from "../../models";
-import { useAppSelector } from "../../reduxHooks";
+//import { Evaluation } from "../../models";
+//import { useAppSelector } from "../../reduxHooks";
 import { useState } from "react";
 import { InfoOutlined } from "@material-ui/icons";
-import Plot from "react-plotly.js";
-import { selectActiveMeetingRatings } from "../../meetings/ratingsSlice";
-import { range } from "lodash-es";
+//import Plot from "react-plotly.js";
+//import { selectActiveMeetingEvaluations } from "../../meetings/ratingsSlice";
+//import { range } from "lodash-es";
 
 type RatingsBarChartProps = {
   questionType: "overallStars" | "contentStars" | "paceStars";
@@ -25,8 +25,8 @@ export default function RatingsBarChart({
   title,
   explanation,
 }: RatingsBarChartProps): JSX.Element {
-  const theme = useTheme();
-  const ratings: Rating[] = useAppSelector(selectActiveMeetingRatings);
+  //const theme = useTheme();
+  //const ratings: Evaluation[] = useAppSelector(selectActiveMeetingEvaluations);
 
   // Popover
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -67,7 +67,7 @@ export default function RatingsBarChart({
           </Popover>
         </Box>
       </Box>
-      <Plot
+      {/*       <Plot
         config={{
           displayModeBar: false,
         }}
@@ -111,7 +111,7 @@ export default function RatingsBarChart({
             type: "bar",
           },
         ]}
-      />
+      />*/}
     </Paper>
   );
 }

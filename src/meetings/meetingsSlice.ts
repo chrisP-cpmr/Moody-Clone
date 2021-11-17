@@ -10,14 +10,14 @@ import {
   AudienceFaceExpression,
   Meeting,
   PublicMeetingInfo,
-  Rating,
+  Evaluation,
   SpeakerVoiceEmotion,
 } from "../models";
 import {
   deleteAudienceFaceExpressions,
   fetchAudienceFaceExpressions,
 } from "./audienceFaceExpressionSlice";
-import { deleteRatings } from "./ratingsSlice";
+import { deleteEvaluations } from "./ratingsSlice";
 import {
   deleteSpeakerVoiceEmotions,
   fetchSpeakerVoiceEmotions,
@@ -93,12 +93,12 @@ export const removeMeeting = createAsyncThunk(
         )
       );
 
-      // Delete Ratings if there are any
+      // Delete Evaluation if there are any
       if (meetingToDelete.PublicMeetingInfo?.id) {
         dispatch(
-          deleteRatings(
+          deleteEvaluations(
             (
-              await DataStore.delete(Rating, (r) =>
+              await DataStore.delete(Evaluation, (r) =>
                 r.publicmeetinginfoID(
                   "eq",
                   meetingToDelete.PublicMeetingInfo!.id

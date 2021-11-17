@@ -137,18 +137,32 @@ export const deletePublicMeetingInfo = /* GraphQL */ `
     }
   }
 `;
-export const createRating = /* GraphQL */ `
-  mutation CreateRating(
-    $input: CreateRatingInput!
-    $condition: ModelRatingConditionInput
+export const createEvaluation = /* GraphQL */ `
+  mutation CreateEvaluation(
+    $input: CreateEvaluationInput!
+    $condition: ModelEvaluationConditionInput
   ) {
-    createRating(input: $input, condition: $condition) {
+    createEvaluation(input: $input, condition: $condition) {
       id
-      overallStars
-      contentStars
-      paceStars
       owner
       publicmeetinginfoID
+      code
+      cognitive_load
+      distraction_1
+      distraction_2
+      distraction_3
+      distraction_4
+      distraction_5
+      distraction_6
+      distraction_7
+      distraction_8
+      distraction_9
+      distraction_10
+      distraction_11
+      distraction_12
+      distraction_13
+      distraction_14
+      distraction_15
       _version
       _deleted
       _lastChangedAt
@@ -157,18 +171,32 @@ export const createRating = /* GraphQL */ `
     }
   }
 `;
-export const updateRating = /* GraphQL */ `
-  mutation UpdateRating(
-    $input: UpdateRatingInput!
-    $condition: ModelRatingConditionInput
+export const updateEvaluation = /* GraphQL */ `
+  mutation UpdateEvaluation(
+    $input: UpdateEvaluationInput!
+    $condition: ModelEvaluationConditionInput
   ) {
-    updateRating(input: $input, condition: $condition) {
+    updateEvaluation(input: $input, condition: $condition) {
       id
-      overallStars
-      contentStars
-      paceStars
       owner
       publicmeetinginfoID
+      code
+      cognitive_load
+      distraction_1
+      distraction_2
+      distraction_3
+      distraction_4
+      distraction_5
+      distraction_6
+      distraction_7
+      distraction_8
+      distraction_9
+      distraction_10
+      distraction_11
+      distraction_12
+      distraction_13
+      distraction_14
+      distraction_15
       _version
       _deleted
       _lastChangedAt
@@ -177,18 +205,32 @@ export const updateRating = /* GraphQL */ `
     }
   }
 `;
-export const deleteRating = /* GraphQL */ `
-  mutation DeleteRating(
-    $input: DeleteRatingInput!
-    $condition: ModelRatingConditionInput
+export const deleteEvaluation = /* GraphQL */ `
+  mutation DeleteEvaluation(
+    $input: DeleteEvaluationInput!
+    $condition: ModelEvaluationConditionInput
   ) {
-    deleteRating(input: $input, condition: $condition) {
+    deleteEvaluation(input: $input, condition: $condition) {
       id
-      overallStars
-      contentStars
-      paceStars
       owner
       publicmeetinginfoID
+      code
+      cognitive_load
+      distraction_1
+      distraction_2
+      distraction_3
+      distraction_4
+      distraction_5
+      distraction_6
+      distraction_7
+      distraction_8
+      distraction_9
+      distraction_10
+      distraction_11
+      distraction_12
+      distraction_13
+      distraction_14
+      distraction_15
       _version
       _deleted
       _lastChangedAt

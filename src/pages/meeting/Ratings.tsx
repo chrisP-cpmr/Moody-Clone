@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../reduxHooks";
 import {
-  fetchActiveMeetingRatings,
-  selectActiveMeetingRatings,
-  subscribeToActiveMeetingRatings,
+  fetchActiveMeetingEvaluations,
+  selectActiveMeetingEvaluations,
+  subscribeToActiveMeetingEvaluations,
 } from "../../meetings/ratingsSlice";
 import { Box, Typography } from "@material-ui/core";
 import Loader from "../../components/Loader";
@@ -16,7 +16,7 @@ export default function Ratings(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchActiveMeetingRatings());
+    dispatch(fetchActiveMeetingEvaluations());
   }, [dispatch]);
 
   const activeMeetingFeedbackLinkId = useAppSelector(
@@ -27,7 +27,7 @@ export default function Ratings(): JSX.Element {
     let unsubscribe: () => void;
     const subscribeToRatings = async () => {
       unsubscribe = unwrapResult(
-        await dispatch(subscribeToActiveMeetingRatings())
+        await dispatch(subscribeToActiveMeetingEvaluations())
       );
     };
     subscribeToRatings();
@@ -43,10 +43,10 @@ export default function Ratings(): JSX.Element {
   ]);
 
   const ratingsLength = useAppSelector(
-    (state) => selectActiveMeetingRatings(state).length
+    (state) => selectActiveMeetingEvaluations(state).length
   );
   const loading = useAppSelector(
-    (state) => state.ratings.loading && state.ratings.ids.length === 0
+    (state) => state.evaluations.loading && state.evaluations.ids.length === 0
   );
 
   return loading ? (

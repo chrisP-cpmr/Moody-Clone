@@ -5,7 +5,7 @@ import { schema } from "./schema";
 const {
   SpeakerVoiceEmotion,
   PublicMeetingInfo,
-  Rating,
+  Evaluation,
   Meeting,
   AudienceFaceExpression,
 } = initSchema(schema);
@@ -13,7 +13,7 @@ const {
 export {
   SpeakerVoiceEmotion,
   PublicMeetingInfo,
-  Rating,
+  Evaluation,
   Meeting,
   AudienceFaceExpression,
 };

@@ -40,18 +40,34 @@ export declare class PublicMeetingInfo {
   ): PublicMeetingInfo;
 }
 
-export declare class Rating {
+export declare class Evaluation {
   readonly id: string;
-  readonly overallStars: number;
-  readonly contentStars?: number;
-  readonly paceStars?: number;
   readonly owner?: string;
   readonly publicmeetinginfoID: string;
-  constructor(init: ModelInit<Rating>);
+  readonly code: string;
+  readonly cognitive_load: number;
+  readonly distraction_1: number;
+  readonly distraction_2: number;
+  readonly distraction_3: number;
+  readonly distraction_4: number;
+  readonly distraction_5: number;
+  readonly distraction_6: number;
+  readonly distraction_7: number;
+  readonly distraction_8: number;
+  readonly distraction_9: number;
+  readonly distraction_10: number;
+  readonly distraction_11: number;
+  readonly distraction_12: number;
+  readonly distraction_13: number;
+  readonly distraction_14: number;
+  readonly distraction_15: number;
+  constructor(init: ModelInit<Evaluation>);
   static copyOf(
-    source: Rating,
-    mutator: (draft: MutableModel<Rating>) => MutableModel<Rating> | void
-  ): Rating;
+    source: Evaluation,
+    mutator: (
+      draft: MutableModel<Evaluation>
+    ) => MutableModel<Evaluation> | void
+  ): Evaluation;
 }
 
 export declare class Meeting {
