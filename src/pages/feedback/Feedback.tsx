@@ -1,16 +1,32 @@
-import { Box, Button, Container, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+  TypographyTypeMap,
+} from "@material-ui/core";
+import { red } from "@material-ui/core/colors";
+import { Favorite, Security, Send } from "@material-ui/icons";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { formatDistanceToNow } from "date-fns";
+import { ChangeEvent, useState } from "react";
 import { useParams } from "react-router-dom";
 import Error from "../../error/Error";
-import { useState } from "react";
-import { Alert, AlertTitle } from "@material-ui/lab";
-import { Favorite, Security, Send } from "@material-ui/icons";
-import { formatDistanceToNow } from "date-fns";
-import NotFound from "../NotFound";
-import { useFetchPublicMeeting, useSubmitAnswer } from "./hooks";
-import { EXPIRATION_MINUTES } from "./constants";
-import { red } from "@material-ui/core/colors";
 import { useAppSelector } from "../../reduxHooks";
-import Question from "./Question";
+import NotFound from "../NotFound";
+import {
+  ErrorMessages,
+  EXPIRATION_MINUTES,
+  Question2Labels,
+  Question3Labels,
+  Question3Options,
+} from "./constants";
+import { useFetchPublicMeeting, useSubmitAnswer } from "./hooks";
 
 export default function Feedback(): JSX.Element | null {
   const { publicMeetingId } = useParams() as any;
@@ -25,9 +41,80 @@ export default function Feedback(): JSX.Element | null {
     (state) => state.auth.user?.id
   );
 
-  const [overallStars, setOverallStars] = useState<number | null>(3);
-  const [paceStars, setPaceStars] = useState<number | null>(null);
-  const [contentStars, setContentStars] = useState<number | null>(null);
+  const [valueQ1, setValueQ1] = useState<string>("");
+  const [valueQ2, setValueQ2] = useState<number>(-1);
+  const [valueQ3, setValueQ3] = useState<{ [q1: number]: number }>({});
+  const [errors, setErrors] = useState<
+    Partial<
+      {
+        [key in keyof typeof ErrorMessages]: boolean;
+      }
+    >
+  >({});
+
+  const handleChangeQ1 = (event: ChangeEvent<HTMLInputElement>): void => {
+    setValueQ1(event.target.value);
+  };
+
+  const handleChangeQ2 = (event: ChangeEvent<HTMLInputElement>): void => {
+    setValueQ2(parseInt(event.target.value, 10));
+  };
+
+  const handleChangeQ3 = (
+    event: ChangeEvent<HTMLInputElement>,
+    q_id: number
+  ): void => {
+    setValueQ3({ ...valueQ3, [q_id]: parseInt(event.target.value, 10) });
+  };
+
+  const hasError = (questionId: keyof typeof ErrorMessages): boolean => {
+    return errors[questionId] || false;
+  };
+
+  const getErrorMessage = (questionId: keyof typeof ErrorMessages): string => {
+    return ErrorMessages[questionId];
+  };
+
+  const getQuestionLabelColor = (
+    questionId: keyof typeof ErrorMessages
+  ): TypographyTypeMap["props"]["color"] => {
+    return hasError(questionId) ? "error" : "textPrimary";
+  };
+
+  const errorElement = (
+    questionId: keyof typeof ErrorMessages
+  ): false | JSX.Element => {
+    return (
+      hasError(questionId) && (
+        <Box my={1}>
+          <Typography variant="body2" color="error">
+            {getErrorMessage(questionId)}
+          </Typography>
+        </Box>
+      )
+    );
+  };
+
+  const validate = (): boolean => {
+    const errors: Partial<{ [key in keyof typeof ErrorMessages]: boolean }> =
+      {};
+
+    if (!/^[a-zA-Z]{4}(19|20)[0-9]{2}$/.test(valueQ1)) {
+      errors["q1"] = true;
+    }
+
+    if (valueQ2 === -1) {
+      errors["q2"] = true;
+    }
+
+    if (Object.keys(valueQ3).length < Object.keys(Question3Labels).length) {
+      errors["q3"] = true;
+    }
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
 
   return !meetingLoading ? (
     !publicMeeting ? (
@@ -58,47 +145,114 @@ export default function Feedback(): JSX.Element | null {
               </Box>
               {!expired ? (
                 <>
-                  <Box mb={3}>
-                    <Question
-                      name="overallStars"
-                      stars={overallStars}
-                      onChange={(event, newValue) => {
-                        setOverallStars(newValue);
-                      }}
-                      question="How do you rate the overall experience?"
-                      required={true}
-                    />
+                  <Box mt={2} mb={5}>
+                    <Typography
+                      variant="h4"
+                      color={getQuestionLabelColor("q1")}
+                    >
+                      Please enter your personal code here
+                    </Typography>
+                    <Typography variant="subtitle1" display="block">
+                      First 2 letters of mother's name, first 2 letters of
+                      father's name, own birthyear (e.g. ANMA1990)
+                    </Typography>
+                    <Box mt={2}>
+                      <FormControl fullWidth>
+                        <TextField
+                          variant="filled"
+                          label="Code"
+                          value={valueQ1}
+                          onChange={handleChangeQ1}
+                          required={true}
+                        />
+                        {errorElement("q1")}
+                      </FormControl>
+                    </Box>
                   </Box>
-                  <Box mb={3}>
-                    <Question
-                      name="paceStars"
-                      stars={paceStars}
-                      onChange={(event, newValue) => {
-                        setPaceStars(newValue);
-                      }}
-                      question="Was the speaker's pace right for you?"
-                      required={false}
-                    />
+                  <Box mt={2} mb={5}>
+                    <Typography
+                      variant="h4"
+                      color={getQuestionLabelColor("q2")}
+                    >
+                      Consider the meeting that was just held. In solving the
+                      problems discussed, I invested...
+                    </Typography>
+                    <Box mt={2}>
+                      <FormControl>
+                        <RadioGroup
+                          aria-label="cognitive_load"
+                          name="cognitive_load"
+                          value={valueQ2}
+                          onChange={handleChangeQ2}
+                        >
+                          {Question2Labels.map((question) => (
+                            <FormControlLabel
+                              key={`q2-l-${question.value}`}
+                              value={question.value}
+                              control={<Radio />}
+                              label={question.label}
+                            />
+                          ))}
+                        </RadioGroup>
+                        {errorElement("q2")}
+                      </FormControl>
+                    </Box>
                   </Box>
-                  <Box mb={3}>
-                    <Question
-                      name="contentStars"
-                      stars={contentStars}
-                      onChange={(event, newValue) => {
-                        setContentStars(newValue);
-                      }}
-                      question="Was the content useful?"
-                      required={false}
-                    />
+                  <Box mt={2} mb={5}>
+                    <Typography
+                      variant="h4"
+                      color={getQuestionLabelColor("q3")}
+                    >
+                      The following questions are meant to assess your attention
+                      and performance during the meeting that was held.
+                    </Typography>
+                    <Typography variant="subtitle1" display="block">
+                      Please indicate how often the following happened:
+                    </Typography>
+                    <Box mt={2}>
+                      <div className="grid">
+                        <div></div>
+                        {Question3Options.map(({ label, value }) => (
+                          <div key={`rating_label_${value}`}>
+                            <Typography variant="body1">{label}</Typography>
+                          </div>
+                        ))}
+                        {Question3Labels.map((question) => [
+                          <div
+                            className="grid__col__label"
+                            key={`q3-l-${question.value}`}
+                          >
+                            <Typography variant="body1">
+                              {question.label}
+                            </Typography>
+                          </div>,
+                          ...Question3Options.map(({ label, value }) => (
+                            <div key={`q3-a-${question.value}_${value}`}>
+                              <Radio
+                                checked={valueQ3[question.value] === value}
+                                onChange={(e) =>
+                                  handleChangeQ3(e, question.value)
+                                }
+                                value={value}
+                                name={`q3-a-${question.value}`}
+                                title={label}
+                                inputProps={{ "aria-label": label }}
+                              />
+                            </div>
+                          )),
+                        ])}
+                      </div>
+                      {errorElement("q3")}
+                    </Box>
                   </Box>
                   <Box mb={2}>
                     <Button
-                      disabled={!overallStars || submitLoading}
+                      disabled={submitLoading}
                       endIcon={<Send />}
                       variant="contained"
                       color="primary"
                       onClick={() =>
-                        submitAnswer(overallStars!, paceStars, contentStars)
+                        validate() && submitAnswer(valueQ1, valueQ2, valueQ3)
                       }
                     >
                       Submit
