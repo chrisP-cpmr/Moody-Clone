@@ -14,8 +14,9 @@ export const useFetchPublicMeeting = (
   id: string
 ): [boolean, boolean, PublicMeetingInfo | null] => {
   const dispatch = useAppDispatch();
-  const [publicMeeting, setPublicMeeting] =
-    useState<PublicMeetingInfo | null>(null);
+  const [publicMeeting, setPublicMeeting] = useState<PublicMeetingInfo | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(true);
   const [expired, setExpired] = useState<boolean>(false);
 
@@ -58,11 +59,7 @@ export const useSubmitAnswer = (
 ): [
   boolean,
   boolean,
-  (
-    overallStars: number,
-    paceStars: number | null,
-    contentStars: number | null
-  ) => void
+  (valueQ1: string, valueQ2: number, valueQ3: { [q1: number]: number }) => void
 ] => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
@@ -70,9 +67,9 @@ export const useSubmitAnswer = (
 
   const callback = useCallback(
     async (
-      overallStars: number,
-      paceStars: number | null,
-      contentStars: number | null
+      valueQ1: string,
+      valueQ2: number,
+      valueQ3: { [q1: number]: number }
     ): Promise<void> => {
       try {
         if (!publicmeetinginfoID || !owner) {
@@ -89,9 +86,9 @@ export const useSubmitAnswer = (
           query: createRating,
           variables: {
             input: {
-              overallStars,
-              paceStars,
-              contentStars,
+              valueQ1,
+              valueQ2,
+              valueQ3,
               publicmeetinginfoID,
               owner,
             },
