@@ -7,7 +7,7 @@ import { getPublicMeetingInfo } from "../../graphql/queries";
 import { GRAPHQL_AUTH_MODE } from "@aws-amplify/api-graphql";
 import { differenceInMinutes } from "date-fns";
 import { addError } from "../../error/errorSlice";
-import { createRating } from "../../graphql/mutations";
+import { createEvaluation } from "../../graphql/mutations";
 import { EXPIRATION_MINUTES } from "./constants";
 
 export const useFetchPublicMeeting = (
@@ -67,9 +67,9 @@ export const useSubmitAnswer = (
 
   const callback = useCallback(
     async (
-      valueQ1: string,
-      valueQ2: number,
-      valueQ3: { [q1: number]: number }
+      code: string,
+      cognitiveLoad: number,
+      distractions: { [id: number]: number }
     ): Promise<void> => {
       try {
         if (!publicmeetinginfoID || !owner) {
@@ -82,13 +82,21 @@ export const useSubmitAnswer = (
         }
 
         setLoading(true);
+
+        const distractionsMapped = Object.keys(distractions)
+          .map((id) => parseInt(id, 10))
+          .reduce<{ [id: string]: number }>((mapped, id) => {
+            mapped[`distraction_${id.toString(10)}`] = distractions[id];
+            return mapped;
+          }, {});
+
         await API.graphql({
-          query: createRating,
+          query: createEvaluation,
           variables: {
             input: {
-              valueQ1,
-              valueQ2,
-              valueQ3,
+              code,
+              cognitive_load: cognitiveLoad,
+              ...distractionsMapped,
               publicmeetinginfoID,
               owner,
             },

@@ -199,34 +199,76 @@ export type DeletePublicMeetingInfoInput = {
   _version?: number | null;
 };
 
-export type CreateRatingInput = {
+export type CreateEvaluationInput = {
   id?: string | null;
-  overallStars: number;
-  contentStars?: number | null;
-  paceStars?: number | null;
   owner?: string | null;
   publicmeetinginfoID: string;
+  code: string;
+  cognitive_load: number;
+  distraction_1: number;
+  distraction_2: number;
+  distraction_3: number;
+  distraction_4: number;
+  distraction_5: number;
+  distraction_6: number;
+  distraction_7: number;
+  distraction_8: number;
+  distraction_9: number;
+  distraction_10: number;
+  distraction_11: number;
+  distraction_12: number;
+  distraction_13: number;
+  distraction_14: number;
+  distraction_15: number;
   _version?: number | null;
 };
 
-export type ModelRatingConditionInput = {
-  overallStars?: ModelIntInput | null;
-  contentStars?: ModelIntInput | null;
-  paceStars?: ModelIntInput | null;
+export type ModelEvaluationConditionInput = {
   publicmeetinginfoID?: ModelIDInput | null;
-  and?: Array<ModelRatingConditionInput | null> | null;
-  or?: Array<ModelRatingConditionInput | null> | null;
-  not?: ModelRatingConditionInput | null;
+  code?: ModelStringInput | null;
+  cognitive_load?: ModelIntInput | null;
+  distraction_1?: ModelIntInput | null;
+  distraction_2?: ModelIntInput | null;
+  distraction_3?: ModelIntInput | null;
+  distraction_4?: ModelIntInput | null;
+  distraction_5?: ModelIntInput | null;
+  distraction_6?: ModelIntInput | null;
+  distraction_7?: ModelIntInput | null;
+  distraction_8?: ModelIntInput | null;
+  distraction_9?: ModelIntInput | null;
+  distraction_10?: ModelIntInput | null;
+  distraction_11?: ModelIntInput | null;
+  distraction_12?: ModelIntInput | null;
+  distraction_13?: ModelIntInput | null;
+  distraction_14?: ModelIntInput | null;
+  distraction_15?: ModelIntInput | null;
+  and?: Array<ModelEvaluationConditionInput | null> | null;
+  or?: Array<ModelEvaluationConditionInput | null> | null;
+  not?: ModelEvaluationConditionInput | null;
 };
 
-export type Rating = {
-  __typename: "Rating";
+export type Evaluation = {
+  __typename: "Evaluation";
   id: string;
-  overallStars: number;
-  contentStars?: number | null;
-  paceStars?: number | null;
   owner?: string | null;
   publicmeetinginfoID: string;
+  code: string;
+  cognitive_load: number;
+  distraction_1: number;
+  distraction_2: number;
+  distraction_3: number;
+  distraction_4: number;
+  distraction_5: number;
+  distraction_6: number;
+  distraction_7: number;
+  distraction_8: number;
+  distraction_9: number;
+  distraction_10: number;
+  distraction_11: number;
+  distraction_12: number;
+  distraction_13: number;
+  distraction_14: number;
+  distraction_15: number;
   _version: number;
   _deleted?: boolean | null;
   _lastChangedAt: number;
@@ -234,17 +276,31 @@ export type Rating = {
   updatedAt: string;
 };
 
-export type UpdateRatingInput = {
+export type UpdateEvaluationInput = {
   id: string;
-  overallStars?: number | null;
-  contentStars?: number | null;
-  paceStars?: number | null;
   owner?: string | null;
   publicmeetinginfoID?: string | null;
+  code?: string | null;
+  cognitive_load?: number | null;
+  distraction_1?: number | null;
+  distraction_2?: number | null;
+  distraction_3?: number | null;
+  distraction_4?: number | null;
+  distraction_5?: number | null;
+  distraction_6?: number | null;
+  distraction_7?: number | null;
+  distraction_8?: number | null;
+  distraction_9?: number | null;
+  distraction_10?: number | null;
+  distraction_11?: number | null;
+  distraction_12?: number | null;
+  distraction_13?: number | null;
+  distraction_14?: number | null;
+  distraction_15?: number | null;
   _version?: number | null;
 };
 
-export type DeleteRatingInput = {
+export type DeleteEvaluationInput = {
   id: string;
   _version?: number | null;
 };
@@ -290,14 +346,14 @@ export type Meeting = {
 
 export type ModelSpeakerVoiceEmotionConnection = {
   __typename: "ModelSpeakerVoiceEmotionConnection";
-  items?: Array<SpeakerVoiceEmotion | null> | null;
+  items: Array<SpeakerVoiceEmotion>;
   nextToken?: string | null;
   startedAt?: number | null;
 };
 
 export type ModelAudienceFaceExpressionConnection = {
   __typename: "ModelAudienceFaceExpressionConnection";
-  items?: Array<AudienceFaceExpression | null> | null;
+  items: Array<AudienceFaceExpression>;
   nextToken?: string | null;
   startedAt?: number | null;
 };
@@ -426,26 +482,40 @@ export type ModelPublicMeetingInfoFilterInput = {
 
 export type ModelPublicMeetingInfoConnection = {
   __typename: "ModelPublicMeetingInfoConnection";
-  items?: Array<PublicMeetingInfo | null> | null;
+  items: Array<PublicMeetingInfo>;
   nextToken?: string | null;
   startedAt?: number | null;
 };
 
-export type ModelRatingFilterInput = {
+export type ModelEvaluationFilterInput = {
   id?: ModelIDInput | null;
-  overallStars?: ModelIntInput | null;
-  contentStars?: ModelIntInput | null;
-  paceStars?: ModelIntInput | null;
   owner?: ModelStringInput | null;
   publicmeetinginfoID?: ModelIDInput | null;
-  and?: Array<ModelRatingFilterInput | null> | null;
-  or?: Array<ModelRatingFilterInput | null> | null;
-  not?: ModelRatingFilterInput | null;
+  code?: ModelStringInput | null;
+  cognitive_load?: ModelIntInput | null;
+  distraction_1?: ModelIntInput | null;
+  distraction_2?: ModelIntInput | null;
+  distraction_3?: ModelIntInput | null;
+  distraction_4?: ModelIntInput | null;
+  distraction_5?: ModelIntInput | null;
+  distraction_6?: ModelIntInput | null;
+  distraction_7?: ModelIntInput | null;
+  distraction_8?: ModelIntInput | null;
+  distraction_9?: ModelIntInput | null;
+  distraction_10?: ModelIntInput | null;
+  distraction_11?: ModelIntInput | null;
+  distraction_12?: ModelIntInput | null;
+  distraction_13?: ModelIntInput | null;
+  distraction_14?: ModelIntInput | null;
+  distraction_15?: ModelIntInput | null;
+  and?: Array<ModelEvaluationFilterInput | null> | null;
+  or?: Array<ModelEvaluationFilterInput | null> | null;
+  not?: ModelEvaluationFilterInput | null;
 };
 
-export type ModelRatingConnection = {
-  __typename: "ModelRatingConnection";
-  items?: Array<Rating | null> | null;
+export type ModelEvaluationConnection = {
+  __typename: "ModelEvaluationConnection";
+  items: Array<Evaluation>;
   nextToken?: string | null;
   startedAt?: number | null;
 };
@@ -464,7 +534,7 @@ export type ModelMeetingFilterInput = {
 
 export type ModelMeetingConnection = {
   __typename: "ModelMeetingConnection";
-  items?: Array<Meeting | null> | null;
+  items: Array<Meeting>;
   nextToken?: string | null;
   startedAt?: number | null;
 };
@@ -635,20 +705,34 @@ export type DeletePublicMeetingInfoMutation = {
   } | null;
 };
 
-export type CreateRatingMutationVariables = {
-  input: CreateRatingInput;
-  condition?: ModelRatingConditionInput | null;
+export type CreateEvaluationMutationVariables = {
+  input: CreateEvaluationInput;
+  condition?: ModelEvaluationConditionInput | null;
 };
 
-export type CreateRatingMutation = {
-  createRating?: {
-    __typename: "Rating";
+export type CreateEvaluationMutation = {
+  createEvaluation?: {
+    __typename: "Evaluation";
     id: string;
-    overallStars: number;
-    contentStars?: number | null;
-    paceStars?: number | null;
     owner?: string | null;
     publicmeetinginfoID: string;
+    code: string;
+    cognitive_load: number;
+    distraction_1: number;
+    distraction_2: number;
+    distraction_3: number;
+    distraction_4: number;
+    distraction_5: number;
+    distraction_6: number;
+    distraction_7: number;
+    distraction_8: number;
+    distraction_9: number;
+    distraction_10: number;
+    distraction_11: number;
+    distraction_12: number;
+    distraction_13: number;
+    distraction_14: number;
+    distraction_15: number;
     _version: number;
     _deleted?: boolean | null;
     _lastChangedAt: number;
@@ -657,20 +741,34 @@ export type CreateRatingMutation = {
   } | null;
 };
 
-export type UpdateRatingMutationVariables = {
-  input: UpdateRatingInput;
-  condition?: ModelRatingConditionInput | null;
+export type UpdateEvaluationMutationVariables = {
+  input: UpdateEvaluationInput;
+  condition?: ModelEvaluationConditionInput | null;
 };
 
-export type UpdateRatingMutation = {
-  updateRating?: {
-    __typename: "Rating";
+export type UpdateEvaluationMutation = {
+  updateEvaluation?: {
+    __typename: "Evaluation";
     id: string;
-    overallStars: number;
-    contentStars?: number | null;
-    paceStars?: number | null;
     owner?: string | null;
     publicmeetinginfoID: string;
+    code: string;
+    cognitive_load: number;
+    distraction_1: number;
+    distraction_2: number;
+    distraction_3: number;
+    distraction_4: number;
+    distraction_5: number;
+    distraction_6: number;
+    distraction_7: number;
+    distraction_8: number;
+    distraction_9: number;
+    distraction_10: number;
+    distraction_11: number;
+    distraction_12: number;
+    distraction_13: number;
+    distraction_14: number;
+    distraction_15: number;
     _version: number;
     _deleted?: boolean | null;
     _lastChangedAt: number;
@@ -679,20 +777,34 @@ export type UpdateRatingMutation = {
   } | null;
 };
 
-export type DeleteRatingMutationVariables = {
-  input: DeleteRatingInput;
-  condition?: ModelRatingConditionInput | null;
+export type DeleteEvaluationMutationVariables = {
+  input: DeleteEvaluationInput;
+  condition?: ModelEvaluationConditionInput | null;
 };
 
-export type DeleteRatingMutation = {
-  deleteRating?: {
-    __typename: "Rating";
+export type DeleteEvaluationMutation = {
+  deleteEvaluation?: {
+    __typename: "Evaluation";
     id: string;
-    overallStars: number;
-    contentStars?: number | null;
-    paceStars?: number | null;
     owner?: string | null;
     publicmeetinginfoID: string;
+    code: string;
+    cognitive_load: number;
+    distraction_1: number;
+    distraction_2: number;
+    distraction_3: number;
+    distraction_4: number;
+    distraction_5: number;
+    distraction_6: number;
+    distraction_7: number;
+    distraction_8: number;
+    distraction_9: number;
+    distraction_10: number;
+    distraction_11: number;
+    distraction_12: number;
+    distraction_13: number;
+    distraction_14: number;
+    distraction_15: number;
     _version: number;
     _deleted?: boolean | null;
     _lastChangedAt: number;
@@ -720,7 +832,7 @@ export type CreateMeetingMutation = {
     _lastChangedAt: number;
     SpeakerVoiceEmotions?: {
       __typename: "ModelSpeakerVoiceEmotionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "SpeakerVoiceEmotion";
         id: string;
         timestamp: number;
@@ -739,7 +851,7 @@ export type CreateMeetingMutation = {
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -759,7 +871,7 @@ export type CreateMeetingMutation = {
     owner?: string | null;
     AudienceFaceExpressions?: {
       __typename: "ModelAudienceFaceExpressionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "AudienceFaceExpression";
         id: string;
         timestamp: number;
@@ -778,7 +890,7 @@ export type CreateMeetingMutation = {
         _deleted?: boolean | null;
         _lastChangedAt: number;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -804,7 +916,7 @@ export type UpdateMeetingMutation = {
     _lastChangedAt: number;
     SpeakerVoiceEmotions?: {
       __typename: "ModelSpeakerVoiceEmotionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "SpeakerVoiceEmotion";
         id: string;
         timestamp: number;
@@ -823,7 +935,7 @@ export type UpdateMeetingMutation = {
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -843,7 +955,7 @@ export type UpdateMeetingMutation = {
     owner?: string | null;
     AudienceFaceExpressions?: {
       __typename: "ModelAudienceFaceExpressionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "AudienceFaceExpression";
         id: string;
         timestamp: number;
@@ -862,7 +974,7 @@ export type UpdateMeetingMutation = {
         _deleted?: boolean | null;
         _lastChangedAt: number;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -888,7 +1000,7 @@ export type DeleteMeetingMutation = {
     _lastChangedAt: number;
     SpeakerVoiceEmotions?: {
       __typename: "ModelSpeakerVoiceEmotionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "SpeakerVoiceEmotion";
         id: string;
         timestamp: number;
@@ -907,7 +1019,7 @@ export type DeleteMeetingMutation = {
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -927,7 +1039,7 @@ export type DeleteMeetingMutation = {
     owner?: string | null;
     AudienceFaceExpressions?: {
       __typename: "ModelAudienceFaceExpressionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "AudienceFaceExpression";
         id: string;
         timestamp: number;
@@ -946,7 +1058,7 @@ export type DeleteMeetingMutation = {
         _deleted?: boolean | null;
         _lastChangedAt: number;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -1073,7 +1185,7 @@ export type ListSpeakerVoiceEmotionsQueryVariables = {
 export type ListSpeakerVoiceEmotionsQuery = {
   listSpeakerVoiceEmotions?: {
     __typename: "ModelSpeakerVoiceEmotionConnection";
-    items?: Array<{
+    items: Array<{
       __typename: "SpeakerVoiceEmotion";
       id: string;
       timestamp: number;
@@ -1092,7 +1204,7 @@ export type ListSpeakerVoiceEmotionsQuery = {
       createdAt: string;
       updatedAt: string;
       owner?: string | null;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
@@ -1108,7 +1220,7 @@ export type SyncSpeakerVoiceEmotionsQueryVariables = {
 export type SyncSpeakerVoiceEmotionsQuery = {
   syncSpeakerVoiceEmotions?: {
     __typename: "ModelSpeakerVoiceEmotionConnection";
-    items?: Array<{
+    items: Array<{
       __typename: "SpeakerVoiceEmotion";
       id: string;
       timestamp: number;
@@ -1127,7 +1239,7 @@ export type SyncSpeakerVoiceEmotionsQuery = {
       createdAt: string;
       updatedAt: string;
       owner?: string | null;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
@@ -1162,7 +1274,7 @@ export type ListPublicMeetingInfosQueryVariables = {
 export type ListPublicMeetingInfosQuery = {
   listPublicMeetingInfos?: {
     __typename: "ModelPublicMeetingInfoConnection";
-    items?: Array<{
+    items: Array<{
       __typename: "PublicMeetingInfo";
       id: string;
       name: string;
@@ -1174,7 +1286,7 @@ export type ListPublicMeetingInfosQuery = {
       _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
@@ -1190,7 +1302,7 @@ export type SyncPublicMeetingInfosQueryVariables = {
 export type SyncPublicMeetingInfosQuery = {
   syncPublicMeetingInfos?: {
     __typename: "ModelPublicMeetingInfoConnection";
-    items?: Array<{
+    items: Array<{
       __typename: "PublicMeetingInfo";
       id: string;
       name: string;
@@ -1202,25 +1314,39 @@ export type SyncPublicMeetingInfosQuery = {
       _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
 };
 
-export type GetRatingQueryVariables = {
+export type GetEvaluationQueryVariables = {
   id: string;
 };
 
-export type GetRatingQuery = {
-  getRating?: {
-    __typename: "Rating";
+export type GetEvaluationQuery = {
+  getEvaluation?: {
+    __typename: "Evaluation";
     id: string;
-    overallStars: number;
-    contentStars?: number | null;
-    paceStars?: number | null;
     owner?: string | null;
     publicmeetinginfoID: string;
+    code: string;
+    cognitive_load: number;
+    distraction_1: number;
+    distraction_2: number;
+    distraction_3: number;
+    distraction_4: number;
+    distraction_5: number;
+    distraction_6: number;
+    distraction_7: number;
+    distraction_8: number;
+    distraction_9: number;
+    distraction_10: number;
+    distraction_11: number;
+    distraction_12: number;
+    distraction_13: number;
+    distraction_14: number;
+    distraction_15: number;
     _version: number;
     _deleted?: boolean | null;
     _lastChangedAt: number;
@@ -1229,58 +1355,86 @@ export type GetRatingQuery = {
   } | null;
 };
 
-export type ListRatingsQueryVariables = {
-  filter?: ModelRatingFilterInput | null;
+export type ListEvaluationsQueryVariables = {
+  filter?: ModelEvaluationFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
 };
 
-export type ListRatingsQuery = {
-  listRatings?: {
-    __typename: "ModelRatingConnection";
-    items?: Array<{
-      __typename: "Rating";
+export type ListEvaluationsQuery = {
+  listEvaluations?: {
+    __typename: "ModelEvaluationConnection";
+    items: Array<{
+      __typename: "Evaluation";
       id: string;
-      overallStars: number;
-      contentStars?: number | null;
-      paceStars?: number | null;
       owner?: string | null;
       publicmeetinginfoID: string;
+      code: string;
+      cognitive_load: number;
+      distraction_1: number;
+      distraction_2: number;
+      distraction_3: number;
+      distraction_4: number;
+      distraction_5: number;
+      distraction_6: number;
+      distraction_7: number;
+      distraction_8: number;
+      distraction_9: number;
+      distraction_10: number;
+      distraction_11: number;
+      distraction_12: number;
+      distraction_13: number;
+      distraction_14: number;
+      distraction_15: number;
       _version: number;
       _deleted?: boolean | null;
       _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
 };
 
-export type SyncRatingsQueryVariables = {
-  filter?: ModelRatingFilterInput | null;
+export type SyncEvaluationsQueryVariables = {
+  filter?: ModelEvaluationFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
   lastSync?: number | null;
 };
 
-export type SyncRatingsQuery = {
-  syncRatings?: {
-    __typename: "ModelRatingConnection";
-    items?: Array<{
-      __typename: "Rating";
+export type SyncEvaluationsQuery = {
+  syncEvaluations?: {
+    __typename: "ModelEvaluationConnection";
+    items: Array<{
+      __typename: "Evaluation";
       id: string;
-      overallStars: number;
-      contentStars?: number | null;
-      paceStars?: number | null;
       owner?: string | null;
       publicmeetinginfoID: string;
+      code: string;
+      cognitive_load: number;
+      distraction_1: number;
+      distraction_2: number;
+      distraction_3: number;
+      distraction_4: number;
+      distraction_5: number;
+      distraction_6: number;
+      distraction_7: number;
+      distraction_8: number;
+      distraction_9: number;
+      distraction_10: number;
+      distraction_11: number;
+      distraction_12: number;
+      distraction_13: number;
+      distraction_14: number;
+      distraction_15: number;
       _version: number;
       _deleted?: boolean | null;
       _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
@@ -1304,7 +1458,7 @@ export type GetMeetingQuery = {
     _lastChangedAt: number;
     SpeakerVoiceEmotions?: {
       __typename: "ModelSpeakerVoiceEmotionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "SpeakerVoiceEmotion";
         id: string;
         timestamp: number;
@@ -1323,7 +1477,7 @@ export type GetMeetingQuery = {
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -1343,7 +1497,7 @@ export type GetMeetingQuery = {
     owner?: string | null;
     AudienceFaceExpressions?: {
       __typename: "ModelAudienceFaceExpressionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "AudienceFaceExpression";
         id: string;
         timestamp: number;
@@ -1362,7 +1516,7 @@ export type GetMeetingQuery = {
         _deleted?: boolean | null;
         _lastChangedAt: number;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -1378,7 +1532,7 @@ export type ListMeetingsQueryVariables = {
 export type ListMeetingsQuery = {
   listMeetings?: {
     __typename: "ModelMeetingConnection";
-    items?: Array<{
+    items: Array<{
       __typename: "Meeting";
       id: string;
       name: string;
@@ -1413,7 +1567,7 @@ export type ListMeetingsQuery = {
         nextToken?: string | null;
         startedAt?: number | null;
       } | null;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
@@ -1429,7 +1583,7 @@ export type SyncMeetingsQueryVariables = {
 export type SyncMeetingsQuery = {
   syncMeetings?: {
     __typename: "ModelMeetingConnection";
-    items?: Array<{
+    items: Array<{
       __typename: "Meeting";
       id: string;
       name: string;
@@ -1464,7 +1618,7 @@ export type SyncMeetingsQuery = {
         nextToken?: string | null;
         startedAt?: number | null;
       } | null;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
@@ -1506,7 +1660,7 @@ export type ListAudienceFaceExpressionsQueryVariables = {
 export type ListAudienceFaceExpressionsQuery = {
   listAudienceFaceExpressions?: {
     __typename: "ModelAudienceFaceExpressionConnection";
-    items?: Array<{
+    items: Array<{
       __typename: "AudienceFaceExpression";
       id: string;
       timestamp: number;
@@ -1525,7 +1679,7 @@ export type ListAudienceFaceExpressionsQuery = {
       _deleted?: boolean | null;
       _lastChangedAt: number;
       owner?: string | null;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
@@ -1541,7 +1695,7 @@ export type SyncAudienceFaceExpressionsQueryVariables = {
 export type SyncAudienceFaceExpressionsQuery = {
   syncAudienceFaceExpressions?: {
     __typename: "ModelAudienceFaceExpressionConnection";
-    items?: Array<{
+    items: Array<{
       __typename: "AudienceFaceExpression";
       id: string;
       timestamp: number;
@@ -1560,7 +1714,7 @@ export type SyncAudienceFaceExpressionsQuery = {
       _deleted?: boolean | null;
       _lastChangedAt: number;
       owner?: string | null;
-    } | null> | null;
+    }>;
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
@@ -1707,19 +1861,33 @@ export type OnDeletePublicMeetingInfoSubscription = {
   } | null;
 };
 
-export type OnCreateRatingSubscriptionVariables = {
+export type OnCreateEvaluationSubscriptionVariables = {
   owner?: string | null;
 };
 
-export type OnCreateRatingSubscription = {
-  onCreateRating?: {
-    __typename: "Rating";
+export type OnCreateEvaluationSubscription = {
+  onCreateEvaluation?: {
+    __typename: "Evaluation";
     id: string;
-    overallStars: number;
-    contentStars?: number | null;
-    paceStars?: number | null;
     owner?: string | null;
     publicmeetinginfoID: string;
+    code: string;
+    cognitive_load: number;
+    distraction_1: number;
+    distraction_2: number;
+    distraction_3: number;
+    distraction_4: number;
+    distraction_5: number;
+    distraction_6: number;
+    distraction_7: number;
+    distraction_8: number;
+    distraction_9: number;
+    distraction_10: number;
+    distraction_11: number;
+    distraction_12: number;
+    distraction_13: number;
+    distraction_14: number;
+    distraction_15: number;
     _version: number;
     _deleted?: boolean | null;
     _lastChangedAt: number;
@@ -1728,19 +1896,33 @@ export type OnCreateRatingSubscription = {
   } | null;
 };
 
-export type OnUpdateRatingSubscriptionVariables = {
+export type OnUpdateEvaluationSubscriptionVariables = {
   owner?: string | null;
 };
 
-export type OnUpdateRatingSubscription = {
-  onUpdateRating?: {
-    __typename: "Rating";
+export type OnUpdateEvaluationSubscription = {
+  onUpdateEvaluation?: {
+    __typename: "Evaluation";
     id: string;
-    overallStars: number;
-    contentStars?: number | null;
-    paceStars?: number | null;
     owner?: string | null;
     publicmeetinginfoID: string;
+    code: string;
+    cognitive_load: number;
+    distraction_1: number;
+    distraction_2: number;
+    distraction_3: number;
+    distraction_4: number;
+    distraction_5: number;
+    distraction_6: number;
+    distraction_7: number;
+    distraction_8: number;
+    distraction_9: number;
+    distraction_10: number;
+    distraction_11: number;
+    distraction_12: number;
+    distraction_13: number;
+    distraction_14: number;
+    distraction_15: number;
     _version: number;
     _deleted?: boolean | null;
     _lastChangedAt: number;
@@ -1749,19 +1931,33 @@ export type OnUpdateRatingSubscription = {
   } | null;
 };
 
-export type OnDeleteRatingSubscriptionVariables = {
+export type OnDeleteEvaluationSubscriptionVariables = {
   owner?: string | null;
 };
 
-export type OnDeleteRatingSubscription = {
-  onDeleteRating?: {
-    __typename: "Rating";
+export type OnDeleteEvaluationSubscription = {
+  onDeleteEvaluation?: {
+    __typename: "Evaluation";
     id: string;
-    overallStars: number;
-    contentStars?: number | null;
-    paceStars?: number | null;
     owner?: string | null;
     publicmeetinginfoID: string;
+    code: string;
+    cognitive_load: number;
+    distraction_1: number;
+    distraction_2: number;
+    distraction_3: number;
+    distraction_4: number;
+    distraction_5: number;
+    distraction_6: number;
+    distraction_7: number;
+    distraction_8: number;
+    distraction_9: number;
+    distraction_10: number;
+    distraction_11: number;
+    distraction_12: number;
+    distraction_13: number;
+    distraction_14: number;
+    distraction_15: number;
     _version: number;
     _deleted?: boolean | null;
     _lastChangedAt: number;
@@ -1788,7 +1984,7 @@ export type OnCreateMeetingSubscription = {
     _lastChangedAt: number;
     SpeakerVoiceEmotions?: {
       __typename: "ModelSpeakerVoiceEmotionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "SpeakerVoiceEmotion";
         id: string;
         timestamp: number;
@@ -1807,7 +2003,7 @@ export type OnCreateMeetingSubscription = {
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -1827,7 +2023,7 @@ export type OnCreateMeetingSubscription = {
     owner?: string | null;
     AudienceFaceExpressions?: {
       __typename: "ModelAudienceFaceExpressionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "AudienceFaceExpression";
         id: string;
         timestamp: number;
@@ -1846,7 +2042,7 @@ export type OnCreateMeetingSubscription = {
         _deleted?: boolean | null;
         _lastChangedAt: number;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -1871,7 +2067,7 @@ export type OnUpdateMeetingSubscription = {
     _lastChangedAt: number;
     SpeakerVoiceEmotions?: {
       __typename: "ModelSpeakerVoiceEmotionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "SpeakerVoiceEmotion";
         id: string;
         timestamp: number;
@@ -1890,7 +2086,7 @@ export type OnUpdateMeetingSubscription = {
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -1910,7 +2106,7 @@ export type OnUpdateMeetingSubscription = {
     owner?: string | null;
     AudienceFaceExpressions?: {
       __typename: "ModelAudienceFaceExpressionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "AudienceFaceExpression";
         id: string;
         timestamp: number;
@@ -1929,7 +2125,7 @@ export type OnUpdateMeetingSubscription = {
         _deleted?: boolean | null;
         _lastChangedAt: number;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -1954,7 +2150,7 @@ export type OnDeleteMeetingSubscription = {
     _lastChangedAt: number;
     SpeakerVoiceEmotions?: {
       __typename: "ModelSpeakerVoiceEmotionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "SpeakerVoiceEmotion";
         id: string;
         timestamp: number;
@@ -1973,7 +2169,7 @@ export type OnDeleteMeetingSubscription = {
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
@@ -1993,7 +2189,7 @@ export type OnDeleteMeetingSubscription = {
     owner?: string | null;
     AudienceFaceExpressions?: {
       __typename: "ModelAudienceFaceExpressionConnection";
-      items?: Array<{
+      items: Array<{
         __typename: "AudienceFaceExpression";
         id: string;
         timestamp: number;
@@ -2012,7 +2208,7 @@ export type OnDeleteMeetingSubscription = {
         _deleted?: boolean | null;
         _lastChangedAt: number;
         owner?: string | null;
-      } | null> | null;
+      }>;
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;

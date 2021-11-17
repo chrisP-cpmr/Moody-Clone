@@ -20,13 +20,27 @@ type PublicMeetingInfo @model @auth(rules: [{allow: owner, operations: [read, cr
   owner: String
 }
 
-type Rating @model @auth(rules: [{allow: owner, operations: [read]}, {allow: public, operations: [create], provider: iam}]) {
+type Evaluation @model @auth(rules: [{allow: owner, operations: [read]}, {allow: public, operations: [create], provider: iam}]) {
   id: ID!
-  overallStars: Int!
-  contentStars: Int
-  paceStars: Int
   owner: String
   publicmeetinginfoID: ID!
+  code: String!
+  cognitive_load: Int!
+  distraction_1: Int!
+  distraction_2: Int!
+  distraction_3: Int!
+  distraction_4: Int!
+  distraction_5: Int!
+  distraction_6: Int!
+  distraction_7: Int!
+  distraction_8: Int!
+  distraction_9: Int!
+  distraction_10: Int!
+  distraction_11: Int!
+  distraction_12: Int!
+  distraction_13: Int!
+  distraction_14: Int!
+  distraction_15: Int!
 }
 
 type Meeting @model(timestamps: {createdAt: "createdAt", updatedAt: "updatedAt"}) @auth(rules: [{allow: owner, operations: [read, create, update, delete]}]) {

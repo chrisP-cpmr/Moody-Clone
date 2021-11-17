@@ -41,9 +41,11 @@ export default function Feedback(): JSX.Element | null {
     (state) => state.auth.user?.id
   );
 
-  const [valueQ1, setValueQ1] = useState<string>("");
-  const [valueQ2, setValueQ2] = useState<number>(-1);
-  const [valueQ3, setValueQ3] = useState<{ [q1: number]: number }>({});
+  const [code, setCode] = useState<string>("");
+  const [cognitiveLoad, setCognitiveLoad] = useState<number>(-1);
+  const [distractions, setDistractions] = useState<{ [id: number]: number }>(
+    {}
+  );
   const [errors, setErrors] = useState<
     Partial<
       {
@@ -53,18 +55,21 @@ export default function Feedback(): JSX.Element | null {
   >({});
 
   const handleChangeQ1 = (event: ChangeEvent<HTMLInputElement>): void => {
-    setValueQ1(event.target.value);
+    setCode(event.target.value);
   };
 
   const handleChangeQ2 = (event: ChangeEvent<HTMLInputElement>): void => {
-    setValueQ2(parseInt(event.target.value, 10));
+    setCognitiveLoad(parseInt(event.target.value, 10));
   };
 
   const handleChangeQ3 = (
     event: ChangeEvent<HTMLInputElement>,
-    q_id: number
+    id: number
   ): void => {
-    setValueQ3({ ...valueQ3, [q_id]: parseInt(event.target.value, 10) });
+    setDistractions({
+      ...distractions,
+      [id]: parseInt(event.target.value, 10),
+    });
   };
 
   const hasError = (questionId: keyof typeof ErrorMessages): boolean => {
@@ -99,15 +104,17 @@ export default function Feedback(): JSX.Element | null {
     const errors: Partial<{ [key in keyof typeof ErrorMessages]: boolean }> =
       {};
 
-    if (!/^[a-zA-Z]{4}(19|20)[0-9]{2}$/.test(valueQ1)) {
+    if (!/^[a-zA-Z]{4}(19|20)[0-9]{2}$/.test(code)) {
       errors["q1"] = true;
     }
 
-    if (valueQ2 === -1) {
+    if (cognitiveLoad === -1) {
       errors["q2"] = true;
     }
 
-    if (Object.keys(valueQ3).length < Object.keys(Question3Labels).length) {
+    if (
+      Object.keys(distractions).length < Object.keys(Question3Labels).length
+    ) {
       errors["q3"] = true;
     }
 
@@ -161,7 +168,7 @@ export default function Feedback(): JSX.Element | null {
                         <TextField
                           variant="filled"
                           label="Code"
-                          value={valueQ1}
+                          value={code}
                           onChange={handleChangeQ1}
                           required={true}
                         />
@@ -182,7 +189,7 @@ export default function Feedback(): JSX.Element | null {
                         <RadioGroup
                           aria-label="cognitive_load"
                           name="cognitive_load"
-                          value={valueQ2}
+                          value={cognitiveLoad}
                           onChange={handleChangeQ2}
                         >
                           {Question2Labels.map((question) => (
@@ -229,7 +236,7 @@ export default function Feedback(): JSX.Element | null {
                           ...Question3Options.map(({ label, value }) => (
                             <div key={`q3-a-${question.value}_${value}`}>
                               <Radio
-                                checked={valueQ3[question.value] === value}
+                                checked={distractions[question.value] === value}
                                 onChange={(e) =>
                                   handleChangeQ3(e, question.value)
                                 }
@@ -252,7 +259,8 @@ export default function Feedback(): JSX.Element | null {
                       variant="contained"
                       color="primary"
                       onClick={() =>
-                        validate() && submitAnswer(valueQ1, valueQ2, valueQ3)
+                        validate() &&
+                        submitAnswer(code, cognitiveLoad, distractions)
                       }
                     >
                       Submit

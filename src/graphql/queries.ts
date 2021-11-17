@@ -171,15 +171,29 @@ export const syncPublicMeetingInfos = /* GraphQL */ `
     }
   }
 `;
-export const getRating = /* GraphQL */ `
-  query GetRating($id: ID!) {
-    getRating(id: $id) {
+export const getEvaluation = /* GraphQL */ `
+  query GetEvaluation($id: ID!) {
+    getEvaluation(id: $id) {
       id
-      overallStars
-      contentStars
-      paceStars
       owner
       publicmeetinginfoID
+      code
+      cognitive_load
+      distraction_1
+      distraction_2
+      distraction_3
+      distraction_4
+      distraction_5
+      distraction_6
+      distraction_7
+      distraction_8
+      distraction_9
+      distraction_10
+      distraction_11
+      distraction_12
+      distraction_13
+      distraction_14
+      distraction_15
       _version
       _deleted
       _lastChangedAt
@@ -188,20 +202,34 @@ export const getRating = /* GraphQL */ `
     }
   }
 `;
-export const listRatings = /* GraphQL */ `
-  query ListRatings(
-    $filter: ModelRatingFilterInput
+export const listEvaluations = /* GraphQL */ `
+  query ListEvaluations(
+    $filter: ModelEvaluationFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listRatings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listEvaluations(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        overallStars
-        contentStars
-        paceStars
         owner
         publicmeetinginfoID
+        code
+        cognitive_load
+        distraction_1
+        distraction_2
+        distraction_3
+        distraction_4
+        distraction_5
+        distraction_6
+        distraction_7
+        distraction_8
+        distraction_9
+        distraction_10
+        distraction_11
+        distraction_12
+        distraction_13
+        distraction_14
+        distraction_15
         _version
         _deleted
         _lastChangedAt
@@ -213,14 +241,14 @@ export const listRatings = /* GraphQL */ `
     }
   }
 `;
-export const syncRatings = /* GraphQL */ `
-  query SyncRatings(
-    $filter: ModelRatingFilterInput
+export const syncEvaluations = /* GraphQL */ `
+  query SyncEvaluations(
+    $filter: ModelEvaluationFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncRatings(
+    syncEvaluations(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -228,11 +256,25 @@ export const syncRatings = /* GraphQL */ `
     ) {
       items {
         id
-        overallStars
-        contentStars
-        paceStars
         owner
         publicmeetinginfoID
+        code
+        cognitive_load
+        distraction_1
+        distraction_2
+        distraction_3
+        distraction_4
+        distraction_5
+        distraction_6
+        distraction_7
+        distraction_8
+        distraction_9
+        distraction_10
+        distraction_11
+        distraction_12
+        distraction_13
+        distraction_14
+        distraction_15
         _version
         _deleted
         _lastChangedAt

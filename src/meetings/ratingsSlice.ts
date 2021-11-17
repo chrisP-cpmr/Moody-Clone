@@ -4,21 +4,21 @@ import {
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-import { Meeting, Rating } from "../models";
+import { Meeting, Evaluation } from "../models";
 import { RootState } from "../reduxStore";
 import { DataStore } from "aws-amplify";
 import { ZenObservable } from "zen-observable-ts";
 
-export const fetchActiveMeetingRatings = createAsyncThunk(
-  "ratings/fetchActiveMeetingRatings",
-  async (_, { getState }): Promise<Rating[]> => {
+export const fetchActiveMeetingEvaluations = createAsyncThunk(
+  "evaluations/fetchActiveMeetingEvaluations",
+  async (_, { getState }): Promise<Evaluation[]> => {
     const state = getState() as RootState;
     if (!!state.meetings.activeMeeting) {
       const activeMeeting: Meeting | undefined =
         state.meetings.entities[state.meetings.activeMeeting];
 
       if (activeMeeting && activeMeeting.PublicMeetingInfo?.id) {
-        return await DataStore.query(Rating, (r) =>
+        return await DataStore.query(Evaluation, (r) =>
           r.publicmeetinginfoID("eq", activeMeeting.PublicMeetingInfo!.id)
         );
       }
@@ -28,8 +28,8 @@ export const fetchActiveMeetingRatings = createAsyncThunk(
   }
 );
 
-export const subscribeToActiveMeetingRatings = createAsyncThunk(
-  "ratings/subscribeToActiveMeetingRatings",
+export const subscribeToActiveMeetingEvaluations = createAsyncThunk(
+  "evaluations/subscribeToActiveMeetingEvaluations",
   async (_, { getState, dispatch }): Promise<() => void> => {
     const state = getState() as RootState;
 
@@ -39,14 +39,14 @@ export const subscribeToActiveMeetingRatings = createAsyncThunk(
 
       if (activeMeeting) {
         const subscription: ZenObservable.Subscription = DataStore.observe(
-          Rating
+          Evaluation
         ).subscribe((msg) => {
           if (
             msg.element &&
             msg.element.publicmeetinginfoID ===
               activeMeeting.PublicMeetingInfo?.id
           ) {
-            dispatch(fetchActiveMeetingRatings());
+            dispatch(fetchActiveMeetingEvaluations());
           }
         });
 
@@ -60,50 +60,52 @@ export const subscribeToActiveMeetingRatings = createAsyncThunk(
   }
 );
 
-const ratingsAdapter = createEntityAdapter<Rating>();
-const initialState = ratingsAdapter.getInitialState({
+const evaluationsAdapter = createEntityAdapter<Evaluation>();
+const initialState = evaluationsAdapter.getInitialState({
   loading: true as boolean,
 });
 
-export const ratingsSlice = createSlice({
-  name: "ratings",
+export const evaluationsSlice = createSlice({
+  name: "evaluations",
   initialState,
   reducers: {
-    deleteRatings: ratingsAdapter.removeMany,
+    deleteEvaluations: evaluationsAdapter.removeMany,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchActiveMeetingRatings.pending, (state) => {
+      .addCase(fetchActiveMeetingEvaluations.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchActiveMeetingRatings.fulfilled, (state, { payload }) => {
-        ratingsAdapter.upsertMany(state, payload);
-        state.loading = false;
-      })
-      .addCase(fetchActiveMeetingRatings.rejected, (state) => {
+      .addCase(
+        fetchActiveMeetingEvaluations.fulfilled,
+        (state, { payload }) => {
+          evaluationsAdapter.upsertMany(state, payload);
+          state.loading = false;
+        }
+      )
+      .addCase(fetchActiveMeetingEvaluations.rejected, (state) => {
         state.loading = false;
       });
   },
 });
 
-export const { deleteRatings } = ratingsSlice.actions;
+export const { deleteEvaluations } = evaluationsSlice.actions;
 
-export const { selectAll: selectAllRatings } = ratingsAdapter.getSelectors(
-  (state: RootState) => state.ratings
-);
+export const { selectAll: selectAllEvaluations } =
+  evaluationsAdapter.getSelectors((state: RootState) => state.evaluations);
 
-export const selectActiveMeetingRatings = createSelector(
+export const selectActiveMeetingEvaluations = createSelector(
   [
     (state) =>
       !!state.meetings.activeMeeting
         ? state.meetings.entities[state.meetings.activeMeeting]
         : undefined,
-    selectAllRatings,
+    selectAllEvaluations,
   ],
-  (activeMeeting?: Meeting, ratings?: Rating[]) =>
-    ratings?.filter(
+  (activeMeeting?: Meeting, evaluations?: Evaluation[]) =>
+    evaluations?.filter(
       (r) => r.publicmeetinginfoID === activeMeeting?.PublicMeetingInfo?.id
     ) || []
 );
 
-export default ratingsSlice.reducer;
+export default evaluationsSlice.reducer;

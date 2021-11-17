@@ -119,15 +119,29 @@ export const onDeletePublicMeetingInfo = /* GraphQL */ `
     }
   }
 `;
-export const onCreateRating = /* GraphQL */ `
-  subscription OnCreateRating($owner: String) {
-    onCreateRating(owner: $owner) {
+export const onCreateEvaluation = /* GraphQL */ `
+  subscription OnCreateEvaluation($owner: String) {
+    onCreateEvaluation(owner: $owner) {
       id
-      overallStars
-      contentStars
-      paceStars
       owner
       publicmeetinginfoID
+      code
+      cognitive_load
+      distraction_1
+      distraction_2
+      distraction_3
+      distraction_4
+      distraction_5
+      distraction_6
+      distraction_7
+      distraction_8
+      distraction_9
+      distraction_10
+      distraction_11
+      distraction_12
+      distraction_13
+      distraction_14
+      distraction_15
       _version
       _deleted
       _lastChangedAt
@@ -136,15 +150,29 @@ export const onCreateRating = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateRating = /* GraphQL */ `
-  subscription OnUpdateRating($owner: String) {
-    onUpdateRating(owner: $owner) {
+export const onUpdateEvaluation = /* GraphQL */ `
+  subscription OnUpdateEvaluation($owner: String) {
+    onUpdateEvaluation(owner: $owner) {
       id
-      overallStars
-      contentStars
-      paceStars
       owner
       publicmeetinginfoID
+      code
+      cognitive_load
+      distraction_1
+      distraction_2
+      distraction_3
+      distraction_4
+      distraction_5
+      distraction_6
+      distraction_7
+      distraction_8
+      distraction_9
+      distraction_10
+      distraction_11
+      distraction_12
+      distraction_13
+      distraction_14
+      distraction_15
       _version
       _deleted
       _lastChangedAt
@@ -153,15 +181,29 @@ export const onUpdateRating = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteRating = /* GraphQL */ `
-  subscription OnDeleteRating($owner: String) {
-    onDeleteRating(owner: $owner) {
+export const onDeleteEvaluation = /* GraphQL */ `
+  subscription OnDeleteEvaluation($owner: String) {
+    onDeleteEvaluation(owner: $owner) {
       id
-      overallStars
-      contentStars
-      paceStars
       owner
       publicmeetinginfoID
+      code
+      cognitive_load
+      distraction_1
+      distraction_2
+      distraction_3
+      distraction_4
+      distraction_5
+      distraction_6
+      distraction_7
+      distraction_8
+      distraction_9
+      distraction_10
+      distraction_11
+      distraction_12
+      distraction_13
+      distraction_14
+      distraction_15
       _version
       _deleted
       _lastChangedAt
