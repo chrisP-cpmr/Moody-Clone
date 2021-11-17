@@ -22,5 +22,29 @@
         "moody7b861bc77b861bc7": {}
       }
     }
+  },
+  "main": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-moody-main-104659-authRole",
+      "UnauthRoleArn": "arn:aws:iam::359588241805:role/amplify-moody-main-104659-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::359588241805:role/amplify-moody-main-104659-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-moody-main-104659-deployment",
+      "UnauthRoleName": "amplify-moody-main-104659-unauthRole",
+      "StackName": "amplify-moody-main-104659",
+      "StackId": "arn:aws:cloudformation:us-east-2:359588241805:stack/amplify-moody-main-104659/efb9e220-4782-11ec-8df2-0a53263435c4",
+      "AmplifyAppId": "dhrd7l5yc5iep"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dhrd7l5yc5iep",
+          "type": "cicd"
+        }
+      },
+      "auth": {
+        "moody7b861bc77b861bc7": {}
+      }
+    }
   }
 }
