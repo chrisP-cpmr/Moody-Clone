@@ -5,12 +5,18 @@ import {
   selectActiveMeetingEvaluations,
   subscribeToActiveMeetingEvaluations,
 } from "../../meetings/ratingsSlice";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 import Loader from "../../components/Loader";
 import { Alert } from "@material-ui/lab";
 import RatingsBarChart from "./RatingsBarChart";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { selectActiveMeetingFeedbackLinkId } from "../../meetings/meetingsSelectors";
+import {
+  Question2Labels,
+  Question3Labels,
+  Question3Options,
+} from "../feedback/constants";
+import { range } from "lodash-es";
 
 export default function Ratings(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -45,6 +51,7 @@ export default function Ratings(): JSX.Element {
   const ratingsLength = useAppSelector(
     (state) => selectActiveMeetingEvaluations(state).length
   );
+
   const loading = useAppSelector(
     (state) => state.evaluations.loading && state.evaluations.ids.length === 0
   );
@@ -71,29 +78,28 @@ export default function Ratings(): JSX.Element {
         </Alert>
       ) : (
         <>
-          <Box display="flex">
-            <Box mr={2}>
+          <Box justifyContent="center" display="flex" mb={4}>
+            <Grid xs={12} md={6} item>
               <RatingsBarChart
-                questionType="overallStars"
-                title="Overall experience"
-                explanation="Shows the distribution of the overall experience scored by stars rom 1 to 5 (1=useless, 5=excellent). This is the score your audience gave using the feedback link you sent them."
+                labelInput={Question2Labels.map(({ label }) => label)}
+                questionType="cognitive_load"
+                title="cognitive load"
+                explanation=" Consider the meeting that was just held. In solving the problems discussed, I invested..."
               />
-            </Box>
-            <Box>
-              <RatingsBarChart
-                questionType="paceStars"
-                title="Speaker's pace"
-                explanation="Shows the distribution of the speaker's pace scored by stars from 1 to 5 (1=way too fast / slow, 5=just right). This is the score your audience gave using the feedback link you sent them."
-              />
-            </Box>
+            </Grid>
           </Box>
-          <Box display="inline-block" mt={2}>
-            <RatingsBarChart
-              questionType="contentStars"
-              title="Usefulness of content"
-              explanation="Shows the distribution of the usefulness of the presentation's content scored by stars from 1 to 5 (1=useless, 5=excellent). This is the score your audience gave using the feedback link you sent them."
-            />
-          </Box>
+          <Grid spacing={4} container>
+            {Question3Labels.map((question) => (
+              <Grid xs={12} md={6} item key={"distraction_" + question.value}>
+                <RatingsBarChart
+                  labelInput={Question3Options.map(({ label }) => label)}
+                  questionType={("distraction_" + question.value) as any}
+                  title={question.label}
+                  explanation={question.label}
+                />
+              </Grid>
+            ))}
+          </Grid>
         </>
       )}
     </>
